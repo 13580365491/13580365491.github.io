@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>&lt;Java&gt;-9 枚举和注解 | 沫若的学习天地</title><meta name="author" content="沫若"><meta name="copyright" content="沫若"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1 枚举把具体的对象一一列举出来的类，就称为 枚举类（enumeration） 实现方法：  自定义枚举 enum 关键字枚举  1.1 自定义枚举 构造器私有化 去掉 set 方法（可保留 get），防止属性被修改。因为枚举对象值通常为只读 在类内部直接创建固定对象。使用 final + static 共同修饰，对象名通常全部大写 枚举对象按照需要可以有多个属性  1.2 enum关键字1234">
+<meta property="og:type" content="article">
+<meta property="og:title" content="<Java>-9 枚举和注解">
+<meta property="og:url" content="http://example.com/2023/03/20/Java-%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/index.html">
+<meta property="og:site_name" content="沫若的学习天地">
+<meta property="og:description" content="1 枚举把具体的对象一一列举出来的类，就称为 枚举类（enumeration） 实现方法：  自定义枚举 enum 关键字枚举  1.1 自定义枚举 构造器私有化 去掉 set 方法（可保留 get），防止属性被修改。因为枚举对象值通常为只读 在类内部直接创建固定对象。使用 final + static 共同修饰，对象名通常全部大写 枚举对象按照需要可以有多个属性  1.2 enum关键字1234">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png">
+<meta property="article:published_time" content="2023-03-20T13:22:53.000Z">
+<meta property="article:modified_time" content="2023-04-29T14:30:32.092Z">
+<meta property="article:author" content="沫若">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png"><link rel="shortcut icon" href="/img/head_portrait.jpg"><link rel="canonical" href="http://example.com/2023/03/20/Java-%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#002FA7","bgDark":"#002FA7","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '<Java>-9 枚举和注解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-29 22:30:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = url => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      link.onload = () => resolve()
+      link.onerror = () => reject()
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/modify.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head_portrait.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png')"><nav id="nav"><span id="blog-info"><a href="/" title="沫若的学习天地"><span class="site-name">沫若的学习天地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">&lt;Java&gt;-9 枚举和注解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-20T13:22:53.000Z" title="发表于 2023-03-20 21:22:53">2023-03-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-29T14:30:32.092Z" title="更新于 2023-04-29 22:30:32">2023-04-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="<Java>-9 枚举和注解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><div class="top-img" style="background-image: url('https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png');"></div><article class="post-content" id="article-container"><h1 id="1-枚举"><a href="#1-枚举" class="headerlink" title="1 枚举"></a>1 枚举</h1><p>把具体的对象一一列举出来的类，就称为 枚举类（enumeration）</p>
+<p>实现方法：</p>
+<ol>
+<li>自定义枚举</li>
+<li><code>enum</code> 关键字枚举</li>
+</ol>
+<h2 id="1-1-自定义枚举"><a href="#1-1-自定义枚举" class="headerlink" title="1.1 自定义枚举"></a>1.1 自定义枚举</h2><ol>
+<li>构造器私有化</li>
+<li>去掉 set 方法（可保留 get），防止属性被修改。因为枚举对象值通常为只读</li>
+<li>在类内部直接创建固定对象。使用 <code>final</code> + <code>static</code> 共同修饰，对象名通常全部大写</li>
+<li>枚举对象按照需要可以有多个属性</li>
+</ol>
+<h2 id="1-2-enum关键字"><a href="#1-2-enum关键字" class="headerlink" title="1.2 enum关键字"></a>1.2 <code>enum</code>关键字</h2><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">Example</span> {</span><br><span class="line"> RED(<span class="string">"小红"</span>, <span class="number">10</span>), BLUE(<span class="string">"小蓝"</span>, <span class="number">11</span>), YELLOW; <span class="comment">//这句话要放在前面，第三个是无参</span></span><br><span class="line"> <span class="keyword">private</span> String name;</span><br><span class="line"> <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span> <span class="title function_">Example</span><span class="params">(String name, <span class="type">int</span> age)</span> {</span><br><span class="line">     <span class="built_in">this</span>.name = name;</span><br><span class="line">     <span class="built_in">this</span>.age = age;</span><br><span class="line"> }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>用关键字 <code>enum</code> 替代 <code>class</code></li>
+<li>用 <code>常量名.(形参列表);</code> 代替创建对象（放在前面），多个对象的场合用 <code>,</code> 间隔。</li>
+<li>如果使用 <code>enum</code> 枚举，要求将常量对象写在前面</li>
+</ol>
+<h3 id="1-2-1-使用细节"><a href="#1-2-1-使用细节" class="headerlink" title="1.2.1 使用细节"></a>1.2.1 使用细节</h3><ol>
+<li><p>当我们用 <code>enum</code> 关键字开发一个枚举类时，默认会继承 java.lang.Enum 类，而且是一个 <code>final</code> 类。</p>
+<p>这样，我们就能使用 Enum 中的相关方法。</p>
+<p><strong>也正因为如此，<code>enum</code> 类不能继承其他类，亦不能被其它类继承</strong></p>
+<p>不过，<code>enum</code> 类和其他类一样，可以实现接口。</p>
+</li>
+<li><p>传统的 <code>public ststic final RED("小红", 10);</code> 简化为 <code>RED("小红", 10);</code></p>
+</li>
+<li><p>如果使用无参构造器创建枚举对象，则 实参列表 和 <code>( )</code> 都能省略</p>
+</li>
+</ol>
+<h3 id="1-2-2-Enum-类中的常用方法"><a href="#1-2-2-Enum-类中的常用方法" class="headerlink" title="1.2.2 Enum 类中的常用方法"></a>1.2.2 <code>Enum</code> 类中的常用方法</h3><ul>
+<li><code>valueOf</code>：将字符串转换成枚举对象。要求字符串必须是已有的常量名，否则报异常</li>
+<li><code>values</code>：返回一个数组 <code>Example[]</code>，其中包含定义的所有枚举对象</li>
+<li><code>getDeclaringClass</code>：得到枚举常量所属的 <code>class</code></li>
+<li><code>name</code>：得到当前枚举常量的名称。建议优先用 <code>toString</code></li>
+<li><code>ordinal</code>：输出该枚举对象的次序/编号（从 0 开始编号。如上例 <code>BLUE.ordinal = 1</code>）</li>
+<li><code>compareTo</code>：比较两个枚举常量的编号（调用常量编号 减去 传入常量编号）</li>
+<li><code>clone</code>：枚举类不能 <code>clone</code>，所以，这是一个只会抛出异常的方法</li>
+</ul>
+<h1 id="2-注解"><a href="#2-注解" class="headerlink" title="2 注解"></a>2 注解</h1><blockquote>
+<p>注解（Annotation）也被称为元数据（Metadata）。用于修饰 包、类、方法、属性、构造器、局部变量 等数据信息</p>
+<p>和注释一样，注解不影响程序逻辑，但注解可以被编译或运行，相当于嵌入在代码中的补充信息</p>
+</blockquote>
+<p>在 JavaSE 中，注解的使用目的比较简单，例如 标记过时的功能，忽略警告 等。在 JavaEE 中注解占据了更重要的角色，例如用于配置应用程序的任何切面，代替 JavaEE 旧版中所遗留的繁冗代码和 XML 配置等。</p>
+<ol>
+<li>使用 <code>@Annotation</code> 时要在前面增加 <code>@</code> 符号，并把该注解当成一个修饰符使用。用于修饰它支持的程序元素。</li>
+<li>三个基本的 <code>@Annotation</code>：<ul>
+<li><code>@Override</code>：限定某个方法，是 重写 父类方法。该注解只能用于方法。如果你写了该注解，编译器会替你校验，看看是不是真的 重写 了父类方法。</li>
+<li><code>@Deprecated</code>：用于表示某个程序元素（类、方法等）已经过时</li>
+<li><code>@SuppressWarnings()</code>：抑制编辑器警告</li>
+</ul>
+</li>
+<li>如果发现 <code>public @interface XXX{}</code> 这种东西，说明是定义了一个注解类 <code>XXX</code>。这里的 <code>@interface</code> 不代表接口（<code>interface</code>）。</li>
+</ol>
+<h2 id="2-1-Override"><a href="#2-1-Override" class="headerlink" title="2.1 @Override"></a>2.1 <code>@Override</code></h2><ol>
+<li><code>@Override</code> 表示指定重写父类的方法（从编译器层面验证），如果父类没有该方法，就报错</li>
+<li>不写该注解，重写依然构成重写</li>
+<li><code>@Override</code> 只能修饰方法，不能修饰其他 类、包、属性等</li>
+<li>查看 <code>@Override</code> 注解源码为 <code>@Target(ElementType.METHOD)</code> 说明只能修饰方法</li>
+<li><code>@Target</code> 是修饰注解的注解，称为 元注解</li>
+</ol>
+<h2 id="2-2-Deprecated"><a href="#2-2-Deprecated" class="headerlink" title="2.2 @Deprecated"></a>2.2 <code>@Deprecated</code></h2><ol>
+<li><p><code>@Deprecated</code> 表示指定的某个程序元素（类、方法等）已过时</p>
+</li>
+<li><p>不推荐使用，但仍能使用</p>
+</li>
+<li><p>可以修饰方法、类、字段、包、参数</p>
+<p><code>@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})</code></p>
+</li>
+<li><p><code>@Deprecated</code> 可以做到新旧版本的兼容和过度</p>
+</li>
+</ol>
+<h2 id="2-3-SuppressWarnings"><a href="#2-3-SuppressWarnings" class="headerlink" title="2.3 @SuppressWarnings()"></a>2.3 <code>@SuppressWarnings()</code></h2><ol>
+<li><p>当我们不想看到警告信息时，用 <code>@SuppressWarnings()</code></p>
+<p>语法：<code>@SuppressWarnings({"..."})</code></p>
+<p>在后面 <code>({"unused", "unchecked"})</code> 这样写入你希望抑制的信息，以下是所有可以输入的关键字</p>
+<p>| <strong>关键字</strong>               | <strong>用途</strong>                                           |<br>| :———————————- | :————————————————————————- |<br>| all                      | 抑制所有警告                                       |<br>| boxing                   | 抑制与装箱/解装箱操作相关的警告                    |<br>| cast                     | 抑制与强制转换操作相关的警告                       |<br>| dep-ann                  | 抑制与已弃用注释相关的警告                         |<br>| deprecation              | 抑制与弃用有关的警告                               |<br>| fallthrough              | 抑制与 switch 语句中丢失断点相关的警告             |<br>| finally                  | 抑制不返回的 finally 块的相关警告                  |<br>| hiding                   | 抑制与隐藏变量的局部变量相关的警告                 |<br>| incomplete-switch        | 抑制与 switch 语句中缺少条目相关的警告（enum）     |<br>| nls                      | 抑制与 非nls 字符串字面值相关的警告                |<br>| null                     | 抑制相对于null分析的警告                           |<br>| rawtypes                 | 在类参数上使用泛型时，抑制与非特定类型相关的警告   |<br>| restriction              | 抑制与不推荐或禁止引用有关的警告                   |<br>| serial                   | 抑制与可序列化类缺少serialVersionUID字段相关的警告 |<br>| static-access            | 抑制与不正确的静态访问有关的警告                   |<br>| synthetic-access         | 抑制与未优化的内部类访问相关的警告                 |<br>| unchecked                | 抑制与未检查的操作相关的警告                       |<br>| unqualified-field-access | 抑制与字段访问不合格相关的警告                     |<br>| unused                   | 抑制与未使用代码相关的警告                         |</p>
+</li>
+<li><p><code>@SuppressWarnings</code> 的范围与你放置的位置相关</p>
+</li>
+</ol>
+<h2 id="2-4-JDK-的元注解（了解即可）"><a href="#2-4-JDK-的元注解（了解即可）" class="headerlink" title="2.4 JDK 的元注解（了解即可）"></a>2.4 JDK 的元注解（了解即可）</h2><blockquote>
+<p>JDK 的 元注解 是用于修饰其他注解的注解</p>
+</blockquote>
+<ol>
+<li><p><code>@Rentention</code>：指定注解的作用范围，有三种范围<code>SOURCE</code> <code>CLASS</code> <code>RUNTIME</code></p>
+<p><code>@Rentention</code> 的三种值：</p>
+<ul>
+<li><code>RententionPolicy.SOURCE</code>：编译器使用后，直接丢弃这种策略的注释</li>
+<li><code>RententionPolicy.CLASS</code>：编译器把注解记录在 class 文件中。当运行 Java 程序时， JVM 不会保留注释。这是默认值</li>
+<li><code>RententionPolicy.RUNTIME</code>：编译器把注解记录在 class 文件中。当运行 Java 程序时，JVM 会保留注解。程序可以通过反射获取该注解</li>
+</ul>
+</li>
+<li><p><code>@Target</code>：指定注解的使用范围</p>
+<p><code>@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})</code></p>
+</li>
+<li><p><code>@Documented</code>：指定该注解会不会在 Javadoc 体现</p>
+</li>
+<li><p><code>@Inherited</code>：子类会继承父类注解</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">沫若</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/20/Java-%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/">http://example.com/2023/03/20/Java-%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">沫若的学习天地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://moruo-img.oss-cn-shenzhen.aliyuncs.com/img/%E6%94%B6%E6%AC%BE%E7%A0%81/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="https://moruo-img.oss-cn-shenzhen.aliyuncs.com/img/%E6%94%B6%E6%AC%BE%E7%A0%81/wechat.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://moruo-img.oss-cn-shenzhen.aliyuncs.com/img/%E6%94%B6%E6%AC%BE%E7%A0%81/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="https://moruo-img.oss-cn-shenzhen.aliyuncs.com/img/%E6%94%B6%E6%AC%BE%E7%A0%81/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/25/Java-%E5%BC%82%E5%B8%B8/" title="<Java>-10 异常"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">&lt;Java&gt;-10 异常</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/18/Java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%EF%BC%88%E9%AB%98%E7%BA%A7%EF%BC%89/" title="<Java>-8 面向对象编程（高级）"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">&lt;Java&gt;-8 面向对象编程（高级）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/06/23/Java-%E5%8C%85%E8%A3%85%E7%B1%BB/" title="<Java>-2 包装类"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-06-23</div><div class="title">&lt;Java&gt;-2 包装类</div></div></a></div><div><a href="/2023/01/21/Java-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="<Java>-1 基础知识"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-21</div><div class="title">&lt;Java&gt;-1 基础知识</div></div></a></div><div><a href="/2023/03/25/Java-%E5%BC%82%E5%B8%B8/" title="<Java>-10 异常"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-25</div><div class="title">&lt;Java&gt;-10 异常</div></div></a></div><div><a href="/2023/01/22/Java-%E5%8F%98%E9%87%8F/" title="<Java>-2 变量"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-22</div><div class="title">&lt;Java&gt;-2 变量</div></div></a></div><div><a href="/2023/01/30/Java-%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8E%92%E5%BA%8F/" title="<Java>-5 数组与排序"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-30</div><div class="title">&lt;Java&gt;-5 数组与排序</div></div></a></div><div><a href="/2023/01/23/Java-%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84/" title="<Java>-4 程序控制结构"><img class="cover" src="https://www.w3cschool.cn/attachments/image/20161101/1477969977993875.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-01-23</div><div class="title">&lt;Java&gt;-4 程序控制结构</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%9E%9A%E4%B8%BE"><span class="toc-text">1 枚举</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9E%9A%E4%B8%BE"><span class="toc-text">1.1 自定义枚举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-enum%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">1.2 enum关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82"><span class="toc-text">1.2.1 使用细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-Enum-%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.2.2 Enum 类中的常用方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3"><span class="toc-text">2 注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Override"><span class="toc-text">2.1 @Override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Deprecated"><span class="toc-text">2.2 @Deprecated</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-SuppressWarnings"><span class="toc-text">2.3 @SuppressWarnings()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-JDK-%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3%EF%BC%88%E4%BA%86%E8%A7%A3%E5%8D%B3%E5%8F%AF%EF%BC%89"><span class="toc-text">2.4 JDK 的元注解（了解即可）</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="copyright">©2023.1.8 - 2023 By 沫若</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'FCAP2tbNtzAgonp2osQ5d3hl-gzGzoHsz',
+      appKey: '4g1Lp78WsQKCJbwYpABoxopm',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
